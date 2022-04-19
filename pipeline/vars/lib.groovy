@@ -717,7 +717,7 @@ def uploadTestResults(def sourceDir, def credPreproc, def runProperties) {
 
     // Upload xml file to report portal
     def report = sh (returnStdout: true, script: ".venv/bin/python utility/rp_client.py -c ${credFile} -d ${sourceDir}/payload")
-    echo report
+    println report
 
     // Upload test result to polarion using xUnit Xml file
     withCredentials([
@@ -726,19 +726,20 @@ def uploadTestResults(def sourceDir, def credPreproc, def runProperties) {
             usernameVariable: 'OSPUSER',
             passwordVariable: 'OSPCRED'
         )
-    ]){
-        def polarionUrl = "https://polarion.engineering.redhat.com/polarion/import/xunit"
-        def xmlFiles = sh (returnStdout: true, script: "ls ${sourceDir}/payload/results/*.xml | cat")
-        if (! xmlFiles ){
-            return
-        }
-        def cmdArgs = "curl -k -u '${OSPUSER}:${OSPCRED}' -X POST -F file=@FILE_NAME ${polarionUrl}"
-        def xmlFileNames = xmlFiles.split("\\n")
-        for (filePath in xmlFileNames) {
-            def localCmd = cmdArgs.replace("FILE_NAME", filePath)
-            sh script: "${localCmd}"
-        }
-    }
+    ])
+//     {
+//         def polarionUrl = "https://polarion.engineering.redhat.com/polarion/import/xunit"
+//         def xmlFiles = sh (returnStdout: true, script: "ls ${sourceDir}/payload/results/*.xml | cat")
+//         if (! xmlFiles ){
+//             return
+//         }
+//         def cmdArgs = "curl -k -u '${OSPUSER}:${OSPCRED}' -X POST -F file=@FILE_NAME ${polarionUrl}"
+//         def xmlFileNames = xmlFiles.split("\\n")
+//         for (filePath in xmlFileNames) {
+//             def localCmd = cmdArgs.replace("FILE_NAME", filePath)
+//             sh script: "${localCmd}"
+//         }
+//     }
 }
 
 return this;
