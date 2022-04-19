@@ -122,12 +122,12 @@ node(nodeName) {
             body += "<dt>Failure Reason:</dt><dd>${failureReason}</dd></dl></body>"
 
             //emailext (
-                mimeType: 'text/html',
-                subject: "${subject}",
-                body: "${body}",
-                from: "cephci@redhat.com",
-                to: "ceph-qe@redhat.com"
-            )
+                //mimeType: 'text/html',
+                //subject: "${subject}",
+                //body: "${body}",
+                //from: "cephci@redhat.com",
+                //to: "ceph-qe@redhat.com"
+            //)
             subject += "\n Jenkins URL: ${env.BUILD_URL}"
             //googlechatnotification(url: "id:rhcephCIGChatRoom", message: subject)
         }
