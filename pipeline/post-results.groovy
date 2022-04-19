@@ -18,7 +18,7 @@ node(nodeName) {
                 checkout(
                     scm: [
                         $class: 'GitSCM',
-                        branches: [[name: 'origin/master']],
+                        branches: [[name: 'refs/remotes/origin/pipeline_test']],
                         extensions: [
                             [
                                 $class: 'CleanBeforeCheckout',
