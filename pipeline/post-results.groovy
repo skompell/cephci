@@ -88,7 +88,7 @@ node(nodeName) {
             }
 
             //Remove the sync results folder
-            sh script: "rclone purge ${remoteName}:${reportBucket}/${resultDir}"
+            //sh script: "rclone purge ${remoteName}:${reportBucket}/${resultDir}"
 
             // Update RH recipe file
             if ( composeInfo != null && testStatus == "SUCCESS" ){
@@ -121,7 +121,7 @@ node(nodeName) {
             body += "<dl><dt>Jenkins Build:</dt><dd>${env.BUILD_URL}</dd>"
             body += "<dt>Failure Reason:</dt><dd>${failureReason}</dd></dl></body>"
 
-            emailext (
+            //emailext (
                 mimeType: 'text/html',
                 subject: "${subject}",
                 body: "${body}",
@@ -129,7 +129,7 @@ node(nodeName) {
                 to: "ceph-qe@redhat.com"
             )
             subject += "\n Jenkins URL: ${env.BUILD_URL}"
-            googlechatnotification(url: "id:rhcephCIGChatRoom", message: subject)
+            //googlechatnotification(url: "id:rhcephCIGChatRoom", message: subject)
         }
     }
 }
